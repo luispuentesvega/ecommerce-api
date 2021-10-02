@@ -14,19 +14,11 @@ API to handle admin and app endpoints for an Ecommerce system
 
 ### Installing
 
-- npm install
+- `npm install`
 
 ### Executing program
 
 - run run dev
-
-## Help
-
-Any advise for common problems or issues.
-
-```
-command to run if program contains helper info
-```
 
 ## Authors
 
