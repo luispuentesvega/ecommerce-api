@@ -6,6 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 const port = 3000;
-app.get('/', (_, res) => res.status(200).send('Hellow World from Here!'));
+app.get('/', (_, res) => res.status(200).send('Hello World from Here!'));
 app.listen(port, () => console.log(`Server started listening to port ${port}`));
 //# sourceMappingURL=index.js.map
