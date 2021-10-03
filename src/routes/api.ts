@@ -4,7 +4,7 @@ const { list, addOrUpdate } = require('../controllers/ProductCategory');
 
 const router = Router();
 
-router.get('/', () => console.log('Hello World'));
+router.get('/', (_, res) => res.send('Ecommerce-API'));
 
 router.get('/productCategories', async (req: Request, res: Response) => {
   try {
@@ -29,6 +29,5 @@ router.post('/productCategories', (req: Request, res: Response) => {
     });
   }
 });
-
 
 module.exports = router;
