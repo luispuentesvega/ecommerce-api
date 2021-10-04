@@ -18,7 +18,7 @@ API to handle admin and app endpoints for an Ecommerce system
 
 ### Executing program
 
-- run run dev
+- `npm run dev`
 
 ## Authors
 
