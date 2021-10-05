@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "commonjs", // how to import and export
     "allowJs": true,
     "declaration": true,
     "esModuleInterop": true,
-    "target": "es6",
-    "noImplicitAny": true,
+    "target": "es6", // which JS version are you using
+    "noImplicitAny": true, // block if you don't define the type of parameter
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",

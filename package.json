@@ -6,14 +6,18 @@
   "scripts": {
     "build": "tsc",
     "start": "tsc & node .",
-    "dev": "tsc -w & nodemon ."
+    "dev": "tsc -w & nodemon .",
+    "test": "jest"
   },
   "author": "luispuentesvega@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "@types/jest": "^27.0.2",
     "aws-sdk": "^2.999.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "jest": "^27.2.4",
+    "ts-jest": "^27.0.5",
     "winston": "^3.3.3"
   },
   "devDependencies": {
