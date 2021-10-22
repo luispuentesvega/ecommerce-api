@@ -11,6 +11,9 @@
     "outDir": "dist",
     "baseUrl": ".",
     "strictPropertyInitialization": false,
+    "types": ["reflect-metadata", "node"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "paths": {
       "*": ["node_modules/*"]
     }
