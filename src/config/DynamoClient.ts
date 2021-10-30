@@ -1,7 +1,6 @@
 import { IDbClient } from "./interfaces";
 import { injectable } from "inversify";
-import "reflect-metadata";
-const AWS = require('aws-sdk');
+import { DynamoDB } from "aws-sdk";
 
 @injectable()
 export class DynamoClient implements IDbClient {
@@ -13,7 +12,7 @@ export class DynamoClient implements IDbClient {
 
   connect() {
     if (!this._instance) {
-      this._instance = new AWS.DynamoDB.DocumentClient();
+      this._instance = new DynamoDB.DocumentClient();
     }
     return this._instance;
   }
