@@ -19,7 +19,7 @@ export interface IProductCategoryService {
   addProductCategory(productCategory: ProductCategory): void;
 }
 
-// Controllers.
+// Controllers
 export interface IProductCategoryController {
   getAllProductCategories(req: Request, res: Response): Promise<Response<void>>;
   addProductCategory(req: Request, res: Response): Promise<Response<void>>;
