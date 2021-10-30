@@ -1,24 +1,21 @@
-import { ProductCategory } from "../../types";
-import { Service } from 'typedi';
+import { injectable, inject } from "inversify";
 
-import ProductCategoryService from "../services/ProductCategoryService";
 import { Request, Response } from "express";
+import TYPES from "../config/types";
+import { IProductCategoryController, IProductCategoryService } from "../config/interfaces";
 
-@Service()
-class ProductCategoryController {
-  constructor(private readonly productCategoryService: ProductCategoryService) {
-  }
+@injectable()
+export default class ProductCategoryController implements IProductCategoryController {
+  @inject(TYPES.IProductCategoryService) private _productCategoryService: IProductCategoryService;
 
-  async getAllProductCategories(_req: Request, res: Response) {
-    const result = await this.productCategoryService.getAllProductCategories();
+  async getAllProductCategories(req: Request, res: Response) {
+    const result = await this._productCategoryService.getAllProductCategories();
     return res.json(result);
   }
 
-  async addOrUpdate(req: Request, res: Response) {
+  async addProductCategory(req: Request, res: Response) {
     const { body } = req;
-    const result = await this.productCategoryService.addOrUpdate(body);
+    const result = await this._productCategoryService.addProductCategory(body);
     return res.json(result);
   }
 }
-
-export default ProductCategoryController;

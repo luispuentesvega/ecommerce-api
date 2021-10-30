@@ -1,20 +1,20 @@
-import { Service } from "typedi";
 
+import { inject, injectable } from "inversify";
+import { IProductCategoryRepository, IProductCategoryService } from "../config/interfaces";
+import TYPES from "../config/types";
 import ProductCategory from "../models/ProductCategory";
-import ProductCategoryRepository from "../repositories/ProductCategoryRepository";
 
-@Service()
-class ProductCategoryService {
-  constructor(private readonly productCategoryRepository: ProductCategoryRepository) { }
+@injectable()
+class ProductCategoryService implements IProductCategoryService {
+  @inject(TYPES.IProductCategoryRepository) private _productCategoryRepository: IProductCategoryRepository;
 
   async getAllProductCategories(): Promise<ProductCategory[]> {
-    const result = await this.productCategoryRepository.getAllProductCategories();
+    const result = await this._productCategoryRepository.getAllProductCategories();
     return result;
   };
 
-  async addOrUpdate(productCategory: ProductCategory) {
-    const result = await this.productCategoryRepository.addOrUpdate(productCategory);
-    return result;
+  async addProductCategory(productCategory: ProductCategory) {
+    return await this._productCategoryRepository.addProductCategory(productCategory);
   }
 }
 

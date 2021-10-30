@@ -1,26 +1,28 @@
-import { Service } from "typedi";
+import { inject, injectable } from "inversify";
 import ProductCategory from "../models/ProductCategory";
-const { DynamoDB } = require('../config/DynamoDB');
+import { IDbClient, IProductCategoryRepository } from "../config/interfaces";
+import TYPES from "../config/types";
+import { config } from "aws-sdk";
 
-const TABLE_NAME = "ProductCategory";
+require('dotenv').config();
 
-@Service()
-class ProductCategoryRepository {
-  private readonly productCategories: ProductCategory[] = [
-  ];
+config.update({
+  region: process.env.AWS_DEFAULT_REGION,
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
+
+const TABLE_NAME = 'ProductCategory';
+
+@injectable()
+export default class ProductCategoryRepository implements IProductCategoryRepository {
+  @inject(TYPES.IDbClient) private _dbClient: IDbClient;
 
   async getAllProductCategories(): Promise<ProductCategory[]> {
-    return this.productCategories;
+    return await this._dbClient.queryData(TABLE_NAME);
   }
 
-  async addOrUpdate(productCategory: ProductCategory) {
-    const params = {
-      TableName: TABLE_NAME,
-      Item: productCategory
-    };
-    const dynamoClient = DynamoDB.getInstance();
-    return await dynamoClient.put(params).promise();
+  async addProductCategory(productCategory: ProductCategory) {
+    return await this._dbClient.addData(TABLE_NAME, productCategory);
   }
-};
-
-export default ProductCategoryRepository;
+}
