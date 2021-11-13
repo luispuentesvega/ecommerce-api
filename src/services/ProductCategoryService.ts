@@ -6,15 +6,19 @@ import ProductCategory from "../models/ProductCategory";
 
 @injectable()
 class ProductCategoryService implements IProductCategoryService {
-  @inject(TYPES.IProductCategoryRepository) private _productCategoryRepository: IProductCategoryRepository;
+  private productCategoryRepository: IProductCategoryRepository;
+
+  constructor(@inject(TYPES.IProductCategoryRepository) productCategoryRepository: IProductCategoryRepository) {
+    this.productCategoryRepository = productCategoryRepository;
+  }
 
   async getAllProductCategories(): Promise<ProductCategory[]> {
-    const result = await this._productCategoryRepository.getAllProductCategories();
+    const result = await this.productCategoryRepository.getAllProductCategories();
     return result;
   };
 
   async addProductCategory(productCategory: ProductCategory) {
-    return await this._productCategoryRepository.addProductCategory(productCategory);
+    return await this.productCategoryRepository.addProductCategory(productCategory);
   }
 }
 

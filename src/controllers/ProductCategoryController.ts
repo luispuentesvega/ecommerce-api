@@ -6,16 +6,19 @@ import { IProductCategoryController, IProductCategoryService } from "../config/i
 
 @injectable()
 export default class ProductCategoryController implements IProductCategoryController {
-  @inject(TYPES.IProductCategoryService) private _productCategoryService: IProductCategoryService;
+  private productCategoryService: IProductCategoryService;
+
+  constructor(@inject(TYPES.IProductCategoryService) productCategoryService: IProductCategoryService) {
+  }
 
   async getAllProductCategories(req: Request, res: Response) {
-    const result = await this._productCategoryService.getAllProductCategories();
+    const result = await this.productCategoryService.getAllProductCategories();
     return res.json(result);
   }
 
   async addProductCategory(req: Request, res: Response) {
     const { body } = req;
-    const result = await this._productCategoryService.addProductCategory(body);
+    const result = await this.productCategoryService.addProductCategory(body);
     return res.json(result);
   }
 }
