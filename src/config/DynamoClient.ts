@@ -2,20 +2,24 @@ import { IDbClient } from "./interfaces";
 import { injectable } from "inversify";
 import { config, DynamoDB } from "aws-sdk";
 
-require('dotenv').config();
+export type DynamoConnection = {
+  region: string,
+  accessKeyId: string,
+  secretAccessKey: string
+};
 
-config.update({
-  region: process.env.AWS_DEFAULT_REGION,
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-});
+export interface IDoc {
+
+};
 
 @injectable()
 export class DynamoClient implements IDbClient {
+  // @TODO: Research how to find the specific ReturnType from the DocumentClient, I tried ReturnType<typeof DynamoDB.DocumentClient> but not working
   private _instance: any;
 
-  constructor() {
-    this._instance = new DynamoDB.DocumentClient();
+  constructor(params: DynamoConnection) {
+    const dynamoDB = new DynamoDB.DocumentClient(params);
+    this._instance = dynamoDB;
   }
 
   async queryData(tableName: string) {
