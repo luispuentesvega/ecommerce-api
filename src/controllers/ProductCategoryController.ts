@@ -9,6 +9,7 @@ export default class ProductCategoryController implements IProductCategoryContro
   private productCategoryService: IProductCategoryService;
 
   constructor(@inject(TYPES.IProductCategoryService) productCategoryService: IProductCategoryService) {
+    this.productCategoryService = productCategoryService;
   }
 
   async getAllProductCategories(req: Request, res: Response) {

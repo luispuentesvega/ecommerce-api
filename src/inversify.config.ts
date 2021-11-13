@@ -7,6 +7,7 @@ import ProductCategoryService from "./services/ProductCategoryService";
 import ProductCategoryController from "./controllers/ProductCategoryController";
 
 const container = new Container();
+
 container.bind<IDbClient>(TYPES.IDbClient).to(DynamoClient);
 container.bind<IProductCategoryRepository>(TYPES.IProductCategoryRepository).to(ProductCategoryRepository);
 container.bind<IProductCategoryService>(TYPES.IProductCategoryService).to(ProductCategoryService);

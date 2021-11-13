@@ -1,20 +1,21 @@
 import { IDbClient } from "./interfaces";
 import { injectable } from "inversify";
-import { DynamoDB } from "aws-sdk";
+import { config, DynamoDB } from "aws-sdk";
+
+require('dotenv').config();
+
+config.update({
+  region: process.env.AWS_DEFAULT_REGION,
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
 
 @injectable()
 export class DynamoClient implements IDbClient {
   private _instance: any;
 
   constructor() {
-    this.connect();
-  }
-
-  connect() {
-    if (!this._instance) {
-      this._instance = new DynamoDB.DocumentClient();
-    }
-    return this._instance;
+    this._instance = new DynamoDB.DocumentClient();
   }
 
   async queryData(tableName: string) {
@@ -24,7 +25,7 @@ export class DynamoClient implements IDbClient {
     let result = [];
     try {
       result = await this._instance.scan(params).promise();
-    } catch (err) {
+    } catch (err: any) {
       throw new Error(err);
     }
     return result?.Items;

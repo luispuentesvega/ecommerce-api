@@ -2,7 +2,6 @@ import ProductCategory from "../models/ProductCategory";
 import { Request, Response } from 'express';
 
 export interface IDbClient {
-  connect(): any;
   queryData(tableName: string): any;
   addData(tableName: string, item: any): any;
 }
