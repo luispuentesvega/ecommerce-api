@@ -4,6 +4,7 @@
     "allowJs": true,
     "declaration": true,
     "esModuleInterop": true,
+    "strict": true,
     "target": "es6", // which JS version are you using
     "noImplicitAny": true, // block if you don't define the type of parameter
     "moduleResolution": "node",
@@ -11,7 +12,7 @@
     "outDir": "dist",
     "baseUrl": "./",
     "strictPropertyInitialization": false,
-    "types": ["reflect-metadata", "node"],
+    "types": ["reflect-metadata", "node", "jest"],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "paths": {
