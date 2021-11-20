@@ -7,17 +7,14 @@ const TABLE_NAME = 'ProductCategory';
 
 @injectable()
 export default class ProductCategoryRepository implements IProductCategoryRepository {
-  private dbClient: IDbClient;
-
-  constructor(@inject(TYPES.IDbClient) dbClient: IDbClient) {
-    this.dbClient = dbClient;
+  constructor(@inject(TYPES.IDbClient) private dbClient: IDbClient) {
   }
 
-  async getAllProductCategories(): Promise<ProductCategory[]> {
-    return await this.dbClient.queryData(TABLE_NAME);
+  getAllProductCategories(): Promise<ProductCategory[]> {
+    return this.dbClient.queryData(TABLE_NAME);
   }
 
-  async addProductCategory(productCategory: ProductCategory) {
-    return await this.dbClient.addData(TABLE_NAME, productCategory);
+  addProductCategory(productCategory: ProductCategory) {
+    return this.dbClient.addData(TABLE_NAME, productCategory);
   }
 }

@@ -6,10 +6,7 @@ import { IProductCategoryController, IProductCategoryService } from "../config/i
 
 @injectable()
 export default class ProductCategoryController implements IProductCategoryController {
-  private productCategoryService: IProductCategoryService;
-
-  constructor(@inject(TYPES.IProductCategoryService) productCategoryService: IProductCategoryService) {
-    this.productCategoryService = productCategoryService;
+  constructor(@inject(TYPES.IProductCategoryService) private productCategoryService: IProductCategoryService) {
   }
 
   async getAllProductCategories(req: Request, res: Response) {

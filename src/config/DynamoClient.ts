@@ -1,45 +1,28 @@
 import { IDbClient } from "./interfaces";
 import { injectable } from "inversify";
-import { config, DynamoDB } from "aws-sdk";
-
-export type DynamoConnection = {
-  region: string,
-  accessKeyId: string,
-  secretAccessKey: string
-};
-
-export interface IDoc {
-
-};
+import { DynamoDB } from "aws-sdk";
 
 @injectable()
 export class DynamoClient implements IDbClient {
-  // @TODO: Research how to find the specific ReturnType from the DocumentClient, I tried ReturnType<typeof DynamoDB.DocumentClient> but not working
-  private _instance: any;
-
-  constructor(params: DynamoConnection) {
-    const dynamoDB = new DynamoDB.DocumentClient(params);
-    this._instance = dynamoDB;
+  constructor(private instance: DynamoDB.DocumentClient) {
   }
 
-  async queryData(tableName: string) {
+  // @TODO: Define response type, add visibility
+  queryData(tableName: string) {
     var params = {
       TableName: tableName
     };
-    let result = [];
-    try {
-      result = await this._instance.scan(params).promise();
-    } catch (err: any) {
-      throw new Error(err);
-    }
-    return result?.Items;
+    // @TODO: Clean data and add itemCount. Create private method to map Dynamo's response "mapper" from AWS Dynamo to own model (based in types)
+    // @TODO: Use generics, for generics, you must send the type
+    return this.instance.scan(params).promise();
   }
 
+  // @TODO: Define response type, add visibility to all functions
   async addData(tableName: string, item: any) {
     const params = {
       TableName: tableName,
       Item: item
     };
-    return await this._instance.put(params).promise();
+    return await this.instance.put(params).promise();
   }
 }

@@ -5,20 +5,19 @@ import { IDbClient, IProductCategoryController, IProductCategoryRepository, IPro
 import ProductCategoryRepository from "./repositories/ProductCategoryRepository";
 import ProductCategoryService from "./services/ProductCategoryService";
 import ProductCategoryController from "./controllers/ProductCategoryController";
-
-require('dotenv').config();
+import { DynamoDB } from "aws-sdk";
+import env from './config/env';
 
 const container = new Container();
 
-console.log('HERE:', process.env.AWS_DEFAULT_REGION);
-
-const dbClient: IDbClient = new DynamoClient({
-  region: process.env.AWS_DEFAULT_REGION || "",
-  accessKeyId: process.env.AWS_ACCESS_KEY || "",
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
+const documentClient = new DynamoDB.DocumentClient({
+  region: env.region,
+  accessKeyId: env.accessKeyId,
+  secretAccessKey: env.secretAccessKey
 });
+const dynamoClient = new DynamoClient(documentClient);
 
-container.bind<IDbClient>(TYPES.IDbClient).toConstantValue(dbClient);
+container.bind<IDbClient>(TYPES.IDbClient).toConstantValue(dynamoClient);
 container.bind<IProductCategoryRepository>(TYPES.IProductCategoryRepository).to(ProductCategoryRepository);
 container.bind<IProductCategoryService>(TYPES.IProductCategoryService).to(ProductCategoryService);
 container.bind<IProductCategoryController>(TYPES.IProductCategoryController).to(ProductCategoryController);
