@@ -1,7 +1,7 @@
 
 import { inject, injectable } from "inversify";
 import { IProductCategoryRepository, IProductCategoryService } from "../config/interfaces";
-import TYPES from "../config/types";
+import TYPES, { QueryData } from "../config/types";
 import ProductCategory from "../models/ProductCategory";
 
 @injectable()
@@ -9,7 +9,7 @@ class ProductCategoryService implements IProductCategoryService {
   constructor(@inject(TYPES.IProductCategoryRepository) private productCategoryRepository: IProductCategoryRepository) {
   }
 
-  getAllProductCategories(): Promise<ProductCategory[]> {
+  getAllProductCategories<T>(): Promise<QueryData<T>> {
     return this.productCategoryRepository.getAllProductCategories();
   };
 

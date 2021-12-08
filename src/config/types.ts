@@ -5,4 +5,15 @@ const TYPES = {
   IProductCategoryController: Symbol.for('IProductCategoryController')
 };
 
+export type QueryData<T> = {
+  data: Array<T>;
+  count: number;
+};
+
+export type DbResult<T> = {
+  Items: Array<T>;
+  Count: number;
+  ScannedCount: number;
+};
+
 export default TYPES;

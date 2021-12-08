@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import ProductCategory from "../models/ProductCategory";
 import { IDbClient, IProductCategoryRepository } from "../config/interfaces";
-import TYPES from "../config/types";
+import TYPES, { QueryData } from "../config/types";
 
 const TABLE_NAME = 'ProductCategory';
 
@@ -10,8 +10,8 @@ export default class ProductCategoryRepository implements IProductCategoryReposi
   constructor(@inject(TYPES.IDbClient) private dbClient: IDbClient) {
   }
 
-  getAllProductCategories(): Promise<ProductCategory[]> {
-    return this.dbClient.queryData(TABLE_NAME);
+  getAllProductCategories<T>(): Promise<QueryData<T>> {
+    return this.dbClient.queryData<T>(TABLE_NAME);
   }
 
   addProductCategory(productCategory: ProductCategory) {
