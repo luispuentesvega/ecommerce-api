@@ -6,7 +6,7 @@ import ProductCategory from "../models/ProductCategory";
 
 @injectable()
 class ProductCategoryService implements IProductCategoryService {
-  constructor(@inject(TYPES.IProductCategoryRepository) private productCategoryRepository: IProductCategoryRepository) {
+  constructor (@inject(TYPES.IProductCategoryRepository) private productCategoryRepository: IProductCategoryRepository) {
   }
 
   getAllProductCategories<T>(): Promise<QueryData<T>> {
