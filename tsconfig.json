@@ -19,6 +19,6 @@
       "*": ["node_modules/*"]
     }
   },
-  "include": ["test/**/*", "src/**/*", "index.d.ts", "types.ts"],
-  "exclude": ["dist"]
+  "include": ["src/**/*", "index.d.ts", "types.ts"],
+  "exclude": ["test/**/*", "dist"]
 }

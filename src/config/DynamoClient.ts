@@ -5,7 +5,7 @@ import { DbResult, QueryData } from "./types";
 
 @injectable()
 export class DynamoClient implements IDbClient {
-  constructor(private instance: DynamoDB.DocumentClient) {
+  constructor (private instance: DynamoDB.DocumentClient) {
   }
 
   mapData<T>(data: DbResult<T>): QueryData<T> {
