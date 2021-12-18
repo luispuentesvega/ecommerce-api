@@ -31,7 +31,7 @@ describe("# DynamoClient", () => {
   let mockDynamoClient: DynamoDB.DocumentClient;
   let dynamoClient: DynamoClient;
 
-  let items = mockedItems();// @TODO: Modify the items
+  let items = mockedItems(); // @TODO: Modify the items
   beforeEach(() => {
     mockDynamoClient = new DynamoDB.DocumentClient();
     dynamoClient = new DynamoClient(mockDynamoClient);
@@ -52,7 +52,7 @@ describe("# DynamoClient", () => {
     });
   });
 
-  it('should not match the expected response with the actual one when give wrong values', () => {
+  it("should not match the expected response with the actual one when give wrong values", () => {
     const dbResponse = {
       Items: items,
       Count: 12,

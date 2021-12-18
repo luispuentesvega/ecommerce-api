@@ -14,7 +14,7 @@ jest.mock("aws-sdk", () => {
   return { DynamoDB: mDynamoDB };
 });
 
-describe('# ProductCategoryService', () => {
+describe("# ProductCategoryService", () => {
   let mockDynamoClient: DynamoDB.DocumentClient;
   let dynamoClient: DynamoClient;
 
@@ -23,7 +23,7 @@ describe('# ProductCategoryService', () => {
     dynamoClient = new DynamoClient(mockDynamoClient);
   });
 
-  it('should call queryData when calling getAllProductCategories', async () => {
+  it("should call queryData when calling getAllProductCategories", async () => {
     let dynamoClient = new DynamoClient(mockDynamoClient);
     let productCategoryRepository = new ProductCategoryRepository(dynamoClient);
     productCategoryRepository.getAllProductCategories = jest.fn();
@@ -34,16 +34,15 @@ describe('# ProductCategoryService', () => {
     expect(productCategoryRepository.getAllProductCategories).toHaveBeenCalled();
   });
 
-  it('should call addData with correct paremeters when calling addProductCategory', async () => {
+  it("should call addData with correct paremeters when calling addProductCategory", async () => {
     let dynamoClient = new DynamoClient(mockDynamoClient);
     let productCategoryRepository = new ProductCategoryRepository(dynamoClient);
     productCategoryRepository.addProductCategory = jest.fn();
     const productCategoryService = new ProductCategoryService(productCategoryRepository);
 
-
     const productCategoryPayload = {
       id: "1",
-      name: "laptop"
+      name: "laptop",
     };
 
     await productCategoryService.addProductCategory(productCategoryPayload);
