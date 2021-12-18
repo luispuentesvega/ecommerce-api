@@ -21,19 +21,15 @@ export class DynamoClient implements IDbClient {
     };
 
     const response = await this.instance.scan(params).promise();
-    const data = {
-      Items: response.Items as T[],
-      Count: response.Count!,
-      ScannedCount: response.ScannedCount!
-    };
-    return this.mapData<T>(data);
+    // const data = {};
+    return this.mapData<T>(response as unknown as DbResult<T>);
   }
 
-  public async addData<T>(tableName: string, item: T): Promise<{}> {
+  public async addData<T>(tableName: string, item: T): Promise<void> {
     const params = {
       TableName: tableName,
       Item: item
     };
-    return this.instance.put(params).promise();
+    this.instance.put(params).promise();
   }
 }

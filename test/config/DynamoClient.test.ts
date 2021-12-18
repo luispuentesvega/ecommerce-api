@@ -4,19 +4,22 @@ import { DynamoClient } from "../../src/config/DynamoClient";
 import ProductCategory from "../../src/models/ProductCategory";
 import { DbResult } from "../../src/config/types";
 
+// Sinon
+const mockedItems = () => [{ id: "1", name: "laptop" }];
+
 jest.mock("aws-sdk", () => {
   const documentClient = {
     get: jest.fn(),
     scan: jest.fn(() => ({
       promise: jest.fn(() =>
         Promise.resolve({
-          Items: [{ id: "1", name: "laptop" }],
+          Items: mockedItems(),
           Count: 1,
           ScannedCount: 1,
         })
       ),
     })),
-    put: jest.fn(() => ({ promise: jest.fn(() => {}) })),
+    put: jest.fn(() => ({ promise: jest.fn(() => { }) })),
   };
   const mDynamoDB = {
     DocumentClient: jest.fn(() => documentClient),
@@ -28,7 +31,7 @@ describe("# DynamoClient", () => {
   let mockDynamoClient: DynamoDB.DocumentClient;
   let dynamoClient: DynamoClient;
 
-  let items = [{ id: "1", name: "laptop" }, { id: "2", name: "smarthpone" }];
+  let items = mockedItems();// @TODO: Modify the items
   beforeEach(() => {
     mockDynamoClient = new DynamoDB.DocumentClient();
     dynamoClient = new DynamoClient(mockDynamoClient);
@@ -45,7 +48,7 @@ describe("# DynamoClient", () => {
 
     expect(mappedData).toEqual({
       data: items,
-      count: 2,
+      count: 10,//@TODO: Add test failing...
     });
   });
 
@@ -58,10 +61,7 @@ describe("# DynamoClient", () => {
   });
 
   it("should call put with parameters when calling addData", async () => {
-    const item = {
-      id: "1",
-      name: "laptop",
-    };
+    const item = mockedItems()[0];
 
     await dynamoClient.addData("ProductCategory", item);
 

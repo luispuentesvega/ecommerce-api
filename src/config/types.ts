@@ -11,7 +11,7 @@ export type QueryData<T> = {
 };
 
 export type DbResult<T> = {
-  Items: Array<T>;
+  Items: Array<T> | [];
   Count: number;
   ScannedCount: number;
 };

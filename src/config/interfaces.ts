@@ -1,17 +1,11 @@
 import ProductCategory from "../models/ProductCategory";
 import { Request, Response } from 'express';
-import { QueryData } from "./types";
-
-type DbResult<T> = {
-  Items: Array<T>;
-  Count: number;
-  ScannedCount: number;
-};
+import { DbResult, QueryData } from "./types";
 
 export interface IDbClient {
   queryData<T>(tableName: string): Promise<QueryData<T>>;
   mapData<T>(data: DbResult<T>): QueryData<T>;
-  addData<T>(tableName: string, item: T): Promise<{}>;
+  addData<T>(tableName: string, item: T): Promise<void>;
 }
 
 // Repositories
