@@ -48,7 +48,22 @@ describe("# DynamoClient", () => {
 
     expect(mappedData).toEqual({
       data: items,
-      count: 10,//@TODO: Add test failing...
+      count: 2,
+    });
+  });
+
+  it('should not match the expected response with the actual one when give wrong values', () => {
+    const dbResponse = {
+      Items: items,
+      Count: 12,
+      ScannedCount: 2,
+    } as DbResult<ProductCategory>;
+
+    const mappedData = dynamoClient.mapData<ProductCategory>(dbResponse);
+
+    expect(mappedData).not.toEqual({
+      data: items,
+      count: 2,
     });
   });
 

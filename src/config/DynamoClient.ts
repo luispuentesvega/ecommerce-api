@@ -21,7 +21,6 @@ export class DynamoClient implements IDbClient {
     };
 
     const response = await this.instance.scan(params).promise();
-    // const data = {};
     return this.mapData<T>(response as unknown as DbResult<T>);
   }
 
