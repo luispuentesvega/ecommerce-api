@@ -10,8 +10,8 @@ export class DynamoClient implements IDbClient {
 
   mapData<T>(data: DbResult<T>): QueryData<T> {
     return {
-      data: data?.Items,
-      count: data?.Count
+      data: data?.items,
+      count: data?.count
     };
   }
 

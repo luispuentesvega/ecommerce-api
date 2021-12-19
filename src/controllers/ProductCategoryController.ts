@@ -1,12 +1,11 @@
 import { injectable, inject } from "inversify";
-
 import { Request, Response } from "express";
 import TYPES from "../config/types";
 import { IProductCategoryController, IProductCategoryService } from "../config/interfaces";
 
 @injectable()
 export default class ProductCategoryController implements IProductCategoryController {
-  constructor(@inject(TYPES.IProductCategoryService) private productCategoryService: IProductCategoryService) {
+  constructor (@inject(TYPES.IProductCategoryService) private productCategoryService: IProductCategoryService) {
   }
 
   async getAllProductCategories(req: Request, res: Response) {

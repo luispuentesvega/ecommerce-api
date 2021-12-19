@@ -39,9 +39,9 @@ describe("# DynamoClient", () => {
 
   it("should map data succesfully", () => {
     const dbResponse = {
-      Items: items,
-      Count: 2,
-      ScannedCount: 2,
+      items: items,
+      count: 2,
+      scannedCount: 2,
     } as DbResult<ProductCategory>;
 
     const mappedData = dynamoClient.mapData<ProductCategory>(dbResponse);
@@ -54,9 +54,9 @@ describe("# DynamoClient", () => {
 
   it("should not match the expected response with the actual one when give wrong values", () => {
     const dbResponse = {
-      Items: items,
-      Count: 12,
-      ScannedCount: 2,
+      items: items,
+      count: 12,
+      scannedCount: 2,
     } as DbResult<ProductCategory>;
 
     const mappedData = dynamoClient.mapData<ProductCategory>(dbResponse);
