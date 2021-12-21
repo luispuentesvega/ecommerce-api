@@ -5,3 +5,6 @@ package-lock.json
 *.gz
 dist
 .env
+.vscode
+dist/*
+coverage/*
