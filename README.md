@@ -13,12 +13,12 @@ API to handle admin and app endpoints for an Ecommerce system
 - ESlint
 
 ### Installing
-
-- `npm install`
+Build the Image
+- `docker build -t ecommerce-api:latest .`
 
 ### Executing program
 
-- `npm run dev`
+- `docker compose up`
 
 ## Authors
 
